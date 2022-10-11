@@ -4,12 +4,12 @@ import React from 'react'
 import Navs from './Navs'
 import Title from './Title';
 
-const MainPage = () => {
+const MainPage = ({children}) => {
   return (
     <div>
         <Navs />
         <Title/>
-        
+        {children}
     </div>
 
   )
