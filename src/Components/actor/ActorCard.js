@@ -9,7 +9,7 @@ const ActorCard = ({name,gender,image,country,deathday,birthday}) => {
       <StyledActorCard>
         <div className='img-wrapper'>
           <img src={image} alt="actor" />
-    </div> 
+      </div> 
         <h1>
           {name} {gender ? `(${gender})` : null}
         </h1> 
