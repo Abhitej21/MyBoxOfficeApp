@@ -8,12 +8,13 @@
 
 import React,{useState} from 'react'
 import ActorGrid from '../Components/actor/ActorGrid';
-import MainPage from '../Components/MainPage';
 import ShowGrid from '../Components/show/ShowGrid';
+import MainPage from '../Components/MainPage';
 import { apiGet } from '../misc/config';
+import { useLastQuery } from '../misc/custom-hooks';
 
 const Home = () => {
-  const [input,setInput] = useState('');
+  const [input,setInput] = useLastQuery();
   const [results,setResults] = useState(null);
   const [option,setOption] = useState('shows');
 

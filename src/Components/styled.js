@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import styled from 'styled-components'
 
 export const FlexGrid = styled.div`
@@ -40,7 +41,10 @@ export const Star = styled.div`
   display: inline-block;
   width: 18px;
   height: 18px;
-  background-color: #ffc806;
+
+  background-color: ${props => {
+    return props.active?'#ffc806':'#ddd';
+  }};
   clip-path: polygon(
     50% 0%,
     61% 35%,
@@ -54,3 +58,4 @@ export const Star = styled.div`
     39% 35%
   );
 `;
+

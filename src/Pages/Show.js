@@ -3,11 +3,11 @@
 import React,{useEffect, useReducer} from 'react'
 import {useParams} from 'react-router-dom'
 import { apiGet } from '../misc/config';
-import Cast from './show/Cast';
-import Details from './show/Details';
-import Seasons from './show/Seasons';
-import ShowMainData from './show/ShowMainData';
-import { InfoBlock, ShowPageWrapper } from './show/Show.styled';
+import Cast from '../Components/show/Cast';
+import Details from '../Components/show/Details';
+import Seasons from '../Components/show/Seasons';
+import ShowMainData from '../Components/show/ShowMainData';
+import { InfoBlock, ShowPageWrapper } from '../Components/show/Show.styled';
 
 
 const reducer = (prevState,action) => {
@@ -37,7 +37,7 @@ function Show() {
     const {show,isLoading,error} = state;
     useEffect(() => {
       let isMounted = true;
-        apiGet(`/shows/${id}?embed[]=episodes&embed[]=cast`).then(results => {
+        apiGet(`/shows/${id}?embed[]=seasons&embed[]=cast`).then(results => {
           if(isMounted){
             dispatch({type: 'FETCH_SUCCESS',show: results});
           }
@@ -48,7 +48,7 @@ function Show() {
         });
         return () => {
           isMounted = false;
-        }
+        };
     },[id]);
   if(isLoading){
     return <div>Data is being loaded.</div>
