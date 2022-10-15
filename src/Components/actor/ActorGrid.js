@@ -4,8 +4,8 @@
 /* eslint-disable import/extensions */
 /* eslint-disable react/function-component-definition */
 import React from 'react'
-import { FlexGrid } from '../styled';
-import ActorCard from './ActorCard';
+import { FlexGrid } from '../styled'
+import ActorCard from './ActorCard'
 import PAGE_NOT_FOUND from '../../images/not-found.png'
 
 const ActorGrid = ({data}) => {

@@ -2,9 +2,9 @@
 /* eslint-disable import/no-named-as-default-member */
 import React from "react" 
 import {Switch,Route} from 'react-router-dom'
-import { ThemeProvider } from "styled-components";
-import Show from "./Pages/Show";
-import Home from './Pages/Home'
+import { ThemeProvider } from "styled-components"
+import Show from './Pages/Show'
+import Home from './Pages/Home';
 import Starred  from "./Pages/Starred";
 
 

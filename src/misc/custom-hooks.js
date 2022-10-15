@@ -22,7 +22,7 @@ export function usePersistedReducer(reducer,initialState,key) {
         const persisted = localStorage.getItem(key);
         return persisted?JSON.parse(persisted):initial;
     });
-    
+
     useEffect(() => {
         localStorage.setItem(key,JSON.stringify(state));
     },[state,key]);
@@ -42,7 +42,7 @@ export function useLastQuery(key='lastQuery'){
     });
     const setPersistedInput = (newState) => {
         setInput(newState);
-        sessionStorage.set(key,JSON.stringify(newState));
+        sessionStorage.setItem(key,JSON.stringify(newState));
     }
     return [input,setPersistedInput];
 }
