@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/MyBoxOfficeApp/static/css/main.b2586571.css",
+    "main.js": "/MyBoxOfficeApp/static/js/main.530da8fa.js",
+    "static/js/787.6e354c4d.chunk.js": "/MyBoxOfficeApp/static/js/787.6e354c4d.chunk.js",
+    "index.html": "/MyBoxOfficeApp/index.html",
+    "main.b2586571.css.map": "/MyBoxOfficeApp/static/css/main.b2586571.css.map",
+    "main.530da8fa.js.map": "/MyBoxOfficeApp/static/js/main.530da8fa.js.map",
+    "787.6e354c4d.chunk.js.map": "/MyBoxOfficeApp/static/js/787.6e354c4d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b2586571.css",
+    "static/js/main.530da8fa.js"
+  ]
+}
