@@ -8,7 +8,7 @@ const MainPage = ({children}) => {
   return (
     <div>
         <Navs />
-        <Title/>
+        <Title head='BOX OFFICE' para='Are you searching for a movie or an actor?'/>
         {children}
     </div>
 

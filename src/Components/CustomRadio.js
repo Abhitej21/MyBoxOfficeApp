@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{memo} from 'react'
 import styled from 'styled-components'
 
 
@@ -55,6 +55,7 @@ const RadioWrapper = styled.label`
 `;
 
 function CustomRadio({label,...rest}) {
+
     return (
         <RadioWrapper htmlFor={rest.id}>
           {label} <input 
@@ -65,4 +66,4 @@ function CustomRadio({label,...rest}) {
     )
 }
 
-export default CustomRadio;
+export default memo(CustomRadio);

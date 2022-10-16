@@ -6,7 +6,7 @@
 /* eslint arrow-body-style: ["error", "as-needed", { 
 "requireReturnForObjectLiteral": true }] */
 
-import React,{useState} from 'react'
+import React,{useState,useCallback} from 'react'
 import ActorGrid from '../Components/actor/ActorGrid';
 import ShowGrid from '../Components/show/ShowGrid';
 import MainPage from '../Components/MainPage';
@@ -14,6 +14,17 @@ import { apiGet } from '../misc/config';
 import { useLastQuery } from '../misc/custom-hooks';
 import { RadioInputsWrapper, SearchInput,SearchButtonWrapper } from './Home.styled';
 import CustomRadio from '../Components/CustomRadio';
+
+
+function displayInfo(results){
+  if(results && results.length===0){
+    return <div>No results</div>;
+  }
+  if(results && results.length > 0){
+    return results[0].show ? <ShowGrid data={results}/>:<ActorGrid data={results}/>;
+  }
+    return null;
+};
 
 
 const Home = () => {
@@ -34,24 +45,16 @@ const Home = () => {
     }
   };
   
-  const onChange = (ev) => {
+  const onChange = useCallback((ev) => {
     setInput(ev.target.value);
     
-  };
+  },[setInput]);
 
   
-  function displayInfo(){
-    if(results && results.length===0){
-      return <div>No results</div>;
-    }
-    if(results && results.length > 0){
-      return results[0].show ? <ShowGrid data={results}/>:<ActorGrid data={results}/>;
-    }
-      return null;
-  };
-  const changeOption = (ev) => {
-     setOption(ev.target.value);
-  }
+ 
+  const changeOption = useCallback((ev) => {
+    setOption(ev.target.value);
+ },[]);
   return (
     
       <MainPage>
@@ -68,7 +71,7 @@ const Home = () => {
       <SearchButtonWrapper>
       <button type="button" onClick={searchInfo}>Search</button>
       </SearchButtonWrapper>
-      {displayInfo()}
+      {displayInfo(results)}
       </MainPage>
     
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import {useLocation} from 'react-router-dom'
 import { NavList,LinkStyled } from './show/Navs.styled';
 
@@ -16,7 +16,7 @@ function Navs() {
     <div>
     <NavList>{
       LINKS.map(item => (
-        <li><LinkStyled to={item.to} className={item.to===location.path ?'active':''}>{item.text}</LinkStyled></li>
+        <li><LinkStyled key={item.to} to={item.to} className={item.to===location.path ?'active':''}>{item.text}</LinkStyled></li>
       )
       )}
     </NavList>
@@ -24,4 +24,4 @@ function Navs() {
   );
 }
 
-export default Navs;
+export default memo(Navs);
