@@ -33,15 +33,16 @@ function Show() {
 
     const {id} = useParams();
   
-    const [state,dispatch] = useReducer(reducer,initialState);
-    const {show,isLoading,error} = state;
+    const [{show,isLoading,error},dispatch] = useReducer(reducer,initialState);
+
     useEffect(() => {
       let isMounted = true;
         apiGet(`/shows/${id}?embed[]=seasons&embed[]=cast`).then(results => {
           if(isMounted){
             dispatch({type: 'FETCH_SUCCESS',show: results});
           }
-        }).catch(err=>{
+        })
+        .catch(err=>{
           if(isMounted){
             dispatch({type:'FETCH_FAILED',error: err.message});
             }

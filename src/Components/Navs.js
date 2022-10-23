@@ -16,7 +16,7 @@ function Navs() {
     <div>
     <NavList>{
       LINKS.map(item => (
-        <li><LinkStyled key={item.to} to={item.to} className={item.to===location.path ?'active':''}>{item.text}</LinkStyled></li>
+        <li key={item.to}><LinkStyled key={item.to} to={item.to} className={item.to===location.path ?'active':''}>{item.text}</LinkStyled></li>
       )
       )}
     </NavList>
