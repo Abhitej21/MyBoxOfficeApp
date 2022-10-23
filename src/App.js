@@ -6,7 +6,7 @@ import { ThemeProvider } from "styled-components";
 import Show from './Pages/Show'
 import Home from './Pages/Home';
 import Starred  from "./Pages/Starred";
-import * as sw from "./Pages/serviceWorkerRegistration";
+
 
 const theme = {
   mainColors: {
@@ -24,7 +24,7 @@ function App() {
       <Route exact path="/">
         <Home/>
       </Route>
-      <Route path="starred">
+      <Route path="/starred">
         <Starred/>
       </Route>
       <Route path="/show/:id">
@@ -34,5 +34,5 @@ function App() {
     </ThemeProvider>
   );
 }
-sw.register();
+
 export default App;

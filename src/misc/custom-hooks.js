@@ -1,52 +1,56 @@
 /* eslint-disable no-console */
-/* eslint-disable react-hooks/rules-of-hooks */
-import {useReducer,useEffect,useState,useRef,useCallback} from 'react'
+import { useReducer, useEffect, useState, useRef, useCallback } from 'react';
 import { apiGet } from './config';
 
-function showsReducer(prevState,action) {
-    switch(action.type){
-        case 'ADD': {
-            return [...prevState,action.showId];
-        }
-        case 'REMOVE': {
-            return prevState.filter(showId => showId!==action.showId);
-        }
-        default:
-            return prevState;
-        
+function showsReducer(prevState, action) {
+  switch (action.type) {
+    case 'ADD': {
+      return [...prevState, action.showId];
     }
 
+    case 'REMOVE': {
+      return prevState.filter(showId => showId !== action.showId);
+    }
+
+    default:
+      return prevState;
+  }
 }
 
+function usePersistedReducer(reducer, initialState, key) {
+  const [state, dispatch] = useReducer(reducer, initialState, initial => {
+    const persisted = localStorage.getItem(key);
 
-function usePersistedReducer(reducer,initialState,key) {
-    const [state,dispatch]  = useReducer(reducer,initialState, initial => {
-        const persisted = localStorage.getItem(key);
-        return persisted?JSON.parse(persisted):initial;
-    });
+    return persisted ? JSON.parse(persisted) : initial;
+  });
 
-    useEffect(() => {
-        localStorage.setItem(key,JSON.stringify(state));
-    },[state,key]);
-    return [state,dispatch];
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [state, key]);
+
+  return [state, dispatch];
 }
 
-
-export function useShows(key='shows'){
-     return usePersistedReducer(showsReducer, [], key);
+export function useShows(key = 'shows') {
+  return usePersistedReducer(showsReducer, [], key);
 }
 
-export function useLastQuery(key='lastQuery'){
+export function useLastQuery(key = 'lastQuery') {
+  const [input, setInput] = useState(() => {
+    const persisted = sessionStorage.getItem(key);
 
-    const [input,setInput] = useState(() => {
-        const persisted = sessionStorage.getItem(key);
-        return persisted?JSON.parse(persisted):"";
-    });
-    const setPersistedInput = useCallback(newState => {
-        setInput(newState);
-        sessionStorage.setItem(key,JSON.stringify(newState));
-    },[key]);
-    return [input,setPersistedInput];
+    return persisted ? JSON.parse(persisted) : '';
+  });
+
+  const setPersistedInput = useCallback(
+    newState => {
+      setInput(newState);
+      sessionStorage.setItem(key, JSON.stringify(newState));
+    },
+    [key]
+  );
+
+  return [input, setPersistedInput];
 }
 
 const reducer = (prevState, action) => {
@@ -63,7 +67,6 @@ const reducer = (prevState, action) => {
       return prevState;
   }
 };
-
 
 export function useShow(showId) {
   const [state, dispatch] = useReducer(reducer, {
@@ -95,20 +98,11 @@ export function useShow(showId) {
   return state;
 }
 
-
-
-
-// THE BELOW PART IS COPIED FROM UseWhyDidYouUpdate website 
-
-
-
-
-
-// Hook
 export function useWhyDidYouUpdate(name, props) {
   // Get a mutable ref object where we can store props ...
   // ... for comparison next time this hook runs.
   const previousProps = useRef();
+
   useEffect(() => {
     if (previousProps.current) {
       // Get all keys from previous and current props
@@ -116,7 +110,7 @@ export function useWhyDidYouUpdate(name, props) {
       // Use this object to keep track of changed props
       const changesObj = {};
       // Iterate through keys
-      allKeys.forEach((key) => {
+      allKeys.forEach(key => {
         // If previous is different from current
         if (previousProps.current[key] !== props[key]) {
           // Add to changesObj
@@ -126,11 +120,13 @@ export function useWhyDidYouUpdate(name, props) {
           };
         }
       });
+
       // If changesObj not empty then output to console
       if (Object.keys(changesObj).length) {
-        console.log("[why-did-you-update]", name, changesObj);
+        console.log('[why-did-you-update]', name, changesObj);
       }
     }
+
     // Finally update previousProps with current props for next hook call
     previousProps.current = props;
   });
